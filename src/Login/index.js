@@ -23,7 +23,7 @@ class Login extends Component {
 		        'Content-Type': 'application/json'
 		    		}
 		    	})
-
+			console.log("logged in as", this.state.username);
         	const parsedResponse = await loginResponse.json();
 
       //   	if(parsedResponse.data === 'login successful'){
