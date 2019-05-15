@@ -21,6 +21,9 @@ class SearchSetlists extends Component {
 		const apiCall = `${process.env.REACT_APP_BACKEND_URL}/concert/search/setlist/${newSearchParam}`
 		try {
 			const response = await fetch(apiCall)
+
+			console.log("raw response: ", response);
+
 			const setlists = await response.json()
 			this.setState({
 				searchResults: setlists.data
