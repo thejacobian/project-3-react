@@ -9,14 +9,14 @@ class WishList extends React.Component {
 		}
 	}
 	async componentDidMount() {
-		const data = await fetch(process.env.REACT_APP_BACKEND_URL + '/user/askldfjasdfjkl',{
+		const data = await fetch(process.env.REACT_APP_BACKEND_URL + '/user/profile',{
 			method: 'GET',
 			credentials: 'include'
 		})
-		const asdf = await data.json()
+		const fetchedData = await data.json()
 		
 		this.setState({
-			list: asdf.wishlist
+			list: fetchedData.wishlist
 		});
 		
 	}
@@ -31,12 +31,12 @@ class WishList extends React.Component {
 		})
 		
 		return (
-			<h1>
-				"heyasdfasdf"
+			<div>
+				<h1>Bucketlist Artists</h1>
 				<ul>
 					{wishList}
 				</ul>
-			</h1>
+			</div>
 		)
 		
 	}

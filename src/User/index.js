@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
+import WishList from '../WishList'
+import ConcertList from '../ConcertList'
 
 class User extends Component {
-	constructor(){
-		super()
-		this.state({
-			username: '',
-			location: '',
-			wishes: [],
-			concerts: []
-		})
 
-	}
 	render(){
+		return(
+			<div>
+				<ConcertList />
+				<WishList />
+			</div>
 
+
+			)
 	}
 }
 

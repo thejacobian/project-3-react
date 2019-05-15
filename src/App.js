@@ -7,6 +7,8 @@ import SearchSetlists from './SearchSetlists'
 import SearchArtists from './SearchArtists'
 import Header from './Header'
 import WishList from './WishList'
+import ConcertList from './ConcertList'
+import User from './User'
 
 function App() {
   return (
@@ -17,7 +19,7 @@ function App() {
         <Route exact path="/auth/register" component={ Register } />
         <Route exact path="/concert/search/setlist" component={ SearchSetlists } />
         <Route exact path="/user/search" component={ SearchArtists } />
-        <Route exact path="/user" component={ WishList } />
+        <Route exact path="/user" component={ User } />
       </Switch>
     </main>
   );
