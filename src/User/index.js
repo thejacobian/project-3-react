@@ -11,9 +11,6 @@ class User extends Component {
 		})
 
 	}
-	componentDidMount(){
-		
-	}
 	render(){
 
 	}
