@@ -35,6 +35,18 @@ class Login extends Component {
 			}
 	
 	}
+	handleClick = async (e) => {
+		e.preventDefault();
+		try {
+			await fetch(process.env.REACT_APP_BACKEND_URL + 'auth/logout', {
+				method: "GET",
+				credentials: 'include'
+			})
+			console.log('logged out');
+		} catch (err){
+			console.log(err)
+		}
+	}
 	render(){
 		return (
 			<form onSubmit={this.handleSubmit}>
@@ -44,6 +56,7 @@ class Login extends Component {
 				<input type="password" name="password" onChange={this.handleChange}/>
 
 				<button type='submit'> Login </button>
+				<button onClick={this.handleClick}> Log Out </button>
 			</form>
 			)
 	}

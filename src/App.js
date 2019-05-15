@@ -9,12 +9,14 @@ import Header from './Header'
 import WishList from './WishList'
 import ConcertList from './ConcertList'
 import User from './User'
+import Home from './Home'
 
 function App() {
   return (
     <main>
       <Header/>
       <Switch>
+        <Route exact path="/" component={ Home } />
         <Route exact path="/auth/login" component={ Login } />
         <Route exact path="/auth/register" component={ Register } />
         <Route exact path="/concert/search/setlist" component={ SearchSetlists } />
