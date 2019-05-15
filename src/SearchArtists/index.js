@@ -21,16 +21,33 @@ class SearchArtists extends Component {
 		const apiCall = `${process.env.REACT_APP_BACKEND_URL}/user/search/${newSearchParam}`
 		try {
 			const response = await fetch(apiCall)
-			const setlists = await response.json()
+			const artists = await response.json()
 			this.setState({
-				searchResults: true
+				searchResults: artists.data
 			})
-			console.log(setlists);
+			console.log(artists);
 		} catch (err){
 			console.log(err);
 		}
 	}
+	handleClick(id){
+		console.log('Bucketlist id: ', id);
+		
+	}
 	render(){
+
+		let artistList = null;
+		if(this.state.searchResults){
+			artistList = this.state.searchResults.map((element, i) => {
+				return(
+					<li key={i} id={element.mbid} >
+						<span>{element.name}</span>
+						<button onClick={this.handleClick.bind(null, element.mbid)}>Add to BucketList</button>
+					</li>
+
+					)
+			})
+		}
 		return(
 			<div>
 				<h1>Search Artists for Bucketlist</h1>
@@ -38,6 +55,9 @@ class SearchArtists extends Component {
 					<input type="text" name="searchParam" placeholder="Artist Name" onChange={this.handleChange}/>
 					<button type="submit">Search</button>
 				</form>
+				<ul>
+					{artistList}
+				</ul>
 			</div>
 		)
 	}

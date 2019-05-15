@@ -35,6 +35,7 @@ class SearchSetlists extends Component {
 	}
 	handleClick(id){
 		console.log('I attended ', id);
+		
 	}
 	render(){
 
