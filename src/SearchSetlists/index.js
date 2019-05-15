@@ -33,9 +33,28 @@ class SearchSetlists extends Component {
 			console.log(err);
 		}
 	}
-	handleClick(id){
+	handleClick = async (id, e) => {
+		e.preventDefault();
 		console.log('I attended ', id);
-		
+		const apiCall = `${process.env.REACT_APP_BACKEND_URL}/concert/new/${id}`
+		try {
+
+			const addedConcert = await fetch(apiCall,{
+				method: 'POST',
+				body: JSON.stringify(id),
+				headers: {
+					'Accept': 'application/json'
+				}
+			})
+			const parsedResponse = await addedConcert.json();
+			console.log(parsedResponse);
+
+		} catch (err){
+			console.log(err)
+		}
+
+
+
 	}
 	render(){
 

@@ -30,9 +30,23 @@ class SearchArtists extends Component {
 			console.log(err);
 		}
 	}
-	handleClick(id){
+	handleClick = async (id, e) => {
+		e.preventDefault();
 		console.log('Bucketlist id: ', id);
-		
+		const apiCall = `${process.env.REACT_APP_BACKEND_URL}/user/newWish/${id}`
+		try {
+			const addedArtist = await fetch(apiCall, {
+				method: 'POST',
+				body: JSON.stringify(id),
+				headers: {
+					'Accept': 'application/json'
+				}
+			})
+			const parsedResponse = await addedArtist.json();
+			console.log(parsedResponse);
+		} catch (err){
+			console.log(err)
+		}
 	}
 	render(){
 
