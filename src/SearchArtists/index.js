@@ -37,6 +37,7 @@ class SearchArtists extends Component {
 		try {
 			const addedArtist = await fetch(apiCall, {
 				method: 'POST',
+				credentials: 'include',
 				body: JSON.stringify(id),
 				headers: {
 					'Accept': 'application/json'

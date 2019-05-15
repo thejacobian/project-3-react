@@ -41,6 +41,7 @@ class SearchSetlists extends Component {
 
 			const addedConcert = await fetch(apiCall,{
 				method: 'POST',
+				credentials: 'include',
 				body: JSON.stringify(id),
 				headers: {
 					'Accept': 'application/json'
