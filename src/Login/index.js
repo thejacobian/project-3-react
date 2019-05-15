@@ -15,9 +15,9 @@ class Login extends Component {
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const loginResponse = await fetch('http://localhost:9000/auth/login', {
+			const loginResponse = await fetch(process.env.REACT_APP_BACKEND_URL + '/auth/login', {
 		      method: 'POST',
-		      credentials: 'include',  // on every request we have to send the cookie
+		      credentials: 'include', 
 		      body: JSON.stringify(this.state),
 		      headers:{
 		        'Content-Type': 'application/json'

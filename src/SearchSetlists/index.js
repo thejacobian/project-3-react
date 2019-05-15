@@ -18,7 +18,7 @@ class SearchSetlists extends Component {
 		e.preventDefault()
 		console.log("handleSubmit hit on SearchSetlists page");
 		const newSearchParam = this.state.searchParam.replace((/" "/g, "%20"))
-		const apiCall = `http://localhost:9000/concert/search/setlist/${newSearchParam}`
+		const apiCall = `${process.env.REACT_APP_BACKEND_URL}/concert/search/setlist/${newSearchParam}`
 		try {
 			const response = await fetch(apiCall)
 			const setlists = await response.json()

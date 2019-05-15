@@ -15,7 +15,7 @@ class Register extends Component {
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const registerResponse = await fetch('http://localhost:9000/auth/register', {
+			const registerResponse = await fetch(process.env.REACT_APP_BACKEND_URL + '/auth/register', {
 		      method: 'POST',
 		      credentials: 'include',  // on every request we have to send the cookie
 		      body: JSON.stringify(this.state),

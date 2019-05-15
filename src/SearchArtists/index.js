@@ -18,7 +18,7 @@ class SearchArtists extends Component {
 		e.preventDefault()
 		console.log("handleSubmit hit on SearchArtists page");
 		const newSearchParam = this.state.searchParam.replace((/" "/g, "%20"))
-		const apiCall = `http://localhost:9000/user/search/${newSearchParam}`
+		const apiCall = `${process.env.REACT_APP_BACKEND_URL}/user/search/${newSearchParam}`
 		try {
 			const response = await fetch(apiCall)
 			const setlists = await response.json()
