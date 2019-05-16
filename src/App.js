@@ -6,14 +6,14 @@ import Register from './Register'
 import SearchSetlists from './SearchSetlists'
 import SearchArtists from './SearchArtists'
 import Header from './Header'
-import WishList from './WishList'
-import ConcertList from './ConcertList'
+// import WishList from './WishList'
+// import ConcertList from './ConcertList'
 import User from './User'
 import Home from './Home'
 
 function App() {
   return (
-    <main>
+    <main className="App">
       <Header/>
       <Switch>
         <Route exact path="/" component={ Home } />

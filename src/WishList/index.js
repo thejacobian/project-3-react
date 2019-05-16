@@ -5,7 +5,8 @@ class WishList extends React.Component {
 	constructor() {
 		super()
 		this.state = {
-			list: []
+			list: [],
+			wishId: null
 		}
 	}
 	async componentDidMount() {
@@ -20,12 +21,25 @@ class WishList extends React.Component {
 		});
 		
 	}
+	handleClick = async (e) => {
+		e.preventDefault();
+		try {
+			const deletedWish = await fetch(process.env.REACT_APP_BACKEND_URL + 'api/v1/user/', {
+				method: "DELETE",
+				credentials: 'include'
+			})
+			// const deleteWishJSON = = await 
+		} catch (err){
+			console.log(err)
+		}
+	}
 	render() {
 
 		const wishList = this.state.list.map((wish, i) => {
 			return (
 				<li key={wish._id}>
-					<span>{wish.artistName}</span><br/>
+					<span><strong>{wish.artistName}</strong></span><br/>
+					<button onClick={this.handleClick}>Delete</button>
 				</li>
 			)
 		})

@@ -23,7 +23,7 @@ class ConcertList extends React.Component {
 		const concertList = this.state.list.map((concert) => {
 			return(
 				<li key={concert._id}>
-					<span>{concert.artistName}</span><br/>
+					<span><strong>{concert.artistName}</strong></span><br/>
 					<span>{concert.venue}</span><br/>
 					<span>{concert.city}</span><br/>
 					<span>{concert.state}</span><br/>

@@ -66,7 +66,7 @@ class SearchSetlists extends Component {
 
 				return(
 					<li key={i} id={element.id} >
-						<span>{element.artist}</span><br/>
+						<span><strong>{element.artist}</strong></span><br/>
 						<span>{element.venue}</span><br/>
 						<span>{element.city}, </span>
 						<span>{element.state}</span><br/>
@@ -80,7 +80,7 @@ class SearchSetlists extends Component {
 		}
 
 		return(
-			<div>
+			<div className="search">
 				<h1>Search Setlists</h1>
 				<form onSubmit={this.handleSubmit}>
 					<input type="text" name="searchParam" placeholder="Artist Name" onChange={this.handleChange}/>

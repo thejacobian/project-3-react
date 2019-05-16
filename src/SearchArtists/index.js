@@ -56,7 +56,7 @@ class SearchArtists extends Component {
 			artistList = this.state.searchResults.map((element, i) => {
 				return(
 					<li key={i} id={element.mbid} >
-						<span>{element.name}</span>
+						<span><strong>{element.name}</strong></span>
 						<button onClick={this.handleClick.bind(null, element.mbid)}>Add to BucketList</button>
 					</li>
 
@@ -64,7 +64,7 @@ class SearchArtists extends Component {
 			})
 		}
 		return(
-			<div>
+			<div className="search">
 				<h1>Search Artists for Bucketlist</h1>
 				<form onSubmit={this.handleSubmit}>
 					<input type="text" name="searchParam" placeholder="Artist Name" onChange={this.handleChange}/>
