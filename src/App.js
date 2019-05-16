@@ -24,6 +24,7 @@ function App() {
         <Route exact path="/user/search" component={ SearchArtists } />
         <Route exact path="/user" component={ User } />
         <Route exact path="/user/allUsers" component={ UserList } />
+        <Route exact path="user/:id" component={ User } />
       </Switch>
     </main>
   );

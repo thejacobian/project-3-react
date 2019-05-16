@@ -54,12 +54,12 @@ header ul li {
 }
 
 
-a {
+header a {
   color: #FFFFFF;
   text-decoration: none;
 }
 
-a:hover {
+header a:hover {
   color: #EAEAEA;
 }
 

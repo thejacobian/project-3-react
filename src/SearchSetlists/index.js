@@ -33,12 +33,6 @@ class SearchSetlists extends Component {
 				searchResults: setlists.data
 			})
 			console.log(this.state);
-			this.setState({
-				searchArtist: '',
-				searchCity: '',
-				searchYear: '',
-			})
-
 		} catch (err){
 			console.log(err);
 		}
@@ -60,7 +54,10 @@ class SearchSetlists extends Component {
 			const parsedResponse = await addedConcert.json();
 			console.log(parsedResponse);
 			this.setState({
-				searchResults: null
+				searchResults: null,
+				searchArtist: '',
+				searchCity: '',
+				searchYear: ''
 			})
 
 		} catch (err){
@@ -96,9 +93,9 @@ class SearchSetlists extends Component {
 			<div className="search">
 				<h1>Search Setlists</h1>
 				<form onSubmit={this.handleSubmit}>
-					<input type="text" name="searchArtist" placeholder="Artist Name" onChange={this.handleChange}/>
-					<input type="text" name="searchCity" placeholder="City" onChange={this.handleChange}/>
-					<input type="text" name="searchYear" placeholder="Year" onChange={this.handleChange}/>
+					<input type="text" name="searchArtist" value={this.state.searchArtist} placeholder="Artist Name" onChange={this.handleChange}/>
+					<input type="text" name="searchCity" value={this.state.searchCity} placeholder="City" onChange={this.handleChange}/>
+					<input type="text" name="searchYear" value={this.state.searchYear} placeholder="Year" onChange={this.handleChange}/>
 					<button type="submit">Search</button>
 				</form>
 				<ul>

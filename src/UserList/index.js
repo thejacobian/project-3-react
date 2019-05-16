@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link }from 'react-router-dom';
 
 class UserList extends React.Component {
 	constructor(){
@@ -24,7 +24,7 @@ class UserList extends React.Component {
 		const userList = this.state.list.map((user) => {
 			return(
 				<li key={user._id}>
-					<span><strong>{user.username}</strong></span><br/>
+					<span><strong><Link to={`${user._id}`}>{user.username}</Link></strong></span><br/>
 					<span>{user.location}</span>
 				</li>
 			)
