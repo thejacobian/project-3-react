@@ -10,7 +10,7 @@ const Header = () => {
 				<li><img src={logo}/></li>
 				<li><Link to='/'>Home</Link></li>
 				<li><Link to='/user'>Profile</Link></li>
-				<li><Link to='/user/search/'>Add an Artist to Bucketlist</Link></li>
+				<li><Link to='/user/search/'>Search Artists for Bucketlist</Link></li>
 				<li><Link to='/concert/search/setlist'>Search for a concert</Link></li>
 				<li><Link to='/user/allUsers'>All Users</Link></li>
 			</ul>

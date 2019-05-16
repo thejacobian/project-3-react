@@ -5,9 +5,7 @@
 
 }
 
-.home img {
-  height: 250px;
-}
+
 
 li {
    list-style: none;
@@ -77,14 +75,33 @@ header img {
   margin-bottom: 10px;
 }
 
+.home h1 {
+  text-align:center;
+}
 
 .home p {
   text-align: center;
 }
 
+.home img {
+  height: 250px;
+}
 
+.home a {
+  color: #28A7F2;
+  text-decoration: none;
+}
 
+.home a:hover {
+  color: #5FC7FD;
+}
 
+.home span {
+  margin: 20px;
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+}
 
 
 
