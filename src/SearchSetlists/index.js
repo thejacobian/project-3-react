@@ -4,7 +4,9 @@ class SearchSetlists extends Component {
 	constructor(){
 		super();
 		this.state = {
-			searchParam: '',
+			searchArtist: '',
+			searchCity: '',
+			searchYear: '',
 			searchResults: null
 		}
 
@@ -17,8 +19,10 @@ class SearchSetlists extends Component {
 	handleSubmit = async (e) => {
 		e.preventDefault()
 		console.log("handleSubmit hit on SearchSetlists page");
-		const newSearchParam = this.state.searchParam.replace((/" "/g, "%20"))
-		const apiCall = `${process.env.REACT_APP_BACKEND_URL}/concert/search/setlist/${newSearchParam}`
+		const newSearchArtist = this.state.searchArtist.replace((/" "/g, "%20"))
+		const newSearchCity = '&cityName=' + this.state.searchCity.replace((/" "/g, "%20"))
+		const newSearchYear = '&year=' + this.state.searchYear.replace((/" "/g, "%20"))
+		const apiCall = `${process.env.REACT_APP_BACKEND_URL}/concert/search/setlist/${newSearchArtist}${newSearchCity}${newSearchYear}`
 		try {
 			const response = await fetch(apiCall)
 
@@ -29,6 +33,12 @@ class SearchSetlists extends Component {
 				searchResults: setlists.data
 			})
 			console.log(this.state);
+			this.setState({
+				searchArtist: '',
+				searchCity: '',
+				searchYear: '',
+			})
+
 		} catch (err){
 			console.log(err);
 		}
@@ -49,6 +59,9 @@ class SearchSetlists extends Component {
 			})
 			const parsedResponse = await addedConcert.json();
 			console.log(parsedResponse);
+			this.setState({
+				searchResults: null
+			})
 
 		} catch (err){
 			console.log(err)
@@ -83,7 +96,9 @@ class SearchSetlists extends Component {
 			<div className="search">
 				<h1>Search Setlists</h1>
 				<form onSubmit={this.handleSubmit}>
-					<input type="text" name="searchParam" placeholder="Artist Name" onChange={this.handleChange}/>
+					<input type="text" name="searchArtist" placeholder="Artist Name" onChange={this.handleChange}/>
+					<input type="text" name="searchCity" placeholder="City" onChange={this.handleChange}/>
+					<input type="text" name="searchYear" placeholder="Year" onChange={this.handleChange}/>
 					<button type="submit">Search</button>
 				</form>
 				<ul>

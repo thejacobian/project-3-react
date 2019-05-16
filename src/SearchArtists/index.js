@@ -45,6 +45,10 @@ class SearchArtists extends Component {
 			})
 			const parsedResponse = await addedArtist.json();
 			console.log(parsedResponse);
+			this.setState({
+				searchParam: '',
+				searchResults: null
+			})
 		} catch (err){
 			console.log(err)
 		}

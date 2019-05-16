@@ -26,7 +26,7 @@ class Register extends Component {
 		    	})
 
         	const parsedResponse = await registerResponse.json();
-        	if(parsedResponse.data === 'login successful'){
+        	if(parsedResponse.status === 200){
 	    		this.props.history.push('../user');
 	    	}
 	    }   
