@@ -20,15 +20,23 @@ class SearchSetlists extends Component {
 		e.preventDefault()
 		console.log("handleSubmit hit on SearchSetlists page");
 		const newSearchArtist = this.state.searchArtist.replace((/" "/g, "%20"))
-		const newSearchCity = '&cityName=' + this.state.searchCity.replace((/" "/g, "%20"))
+		const newSearchCity = 'cityName=' + this.state.searchCity.replace((/" "/g, "%20"))
 		const newSearchYear = '&year=' + this.state.searchYear.replace((/" "/g, "%20"))
-		const apiCall = `${process.env.REACT_APP_BACKEND_URL}/concert/search/setlist/${newSearchArtist}${newSearchCity}${newSearchYear}`
+		// const apiCall = `${process.env.REACT_APP_BACKEND_URL}/concert/search/setlist/${newSearchArtist}/${newSearchCity}${newSearchYear}`
+		const apiCall = process.env.REACT_APP_BACKEND_URL + '/concert/search/setlist?artist='
+			+ this.state.searchArtist.replace(/" "/g, "%20")
+			+ '&cityName=' + this.state.searchCity.replace(/" "/g, "%20")
+			+ '&year=' + this.state.searchYear.replace((/" "/g, "%20"))
+		console.log(apiCall);
+
 		try {
 			const response = await fetch(apiCall)
 
 			console.log("raw response: ", response);
 
 			const setlists = await response.json()
+			console.log("here's the response from the API call");
+			console.log(setlists);
 			this.setState({
 				searchResults: setlists.data
 			})
