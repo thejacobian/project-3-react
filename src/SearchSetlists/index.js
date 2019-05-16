@@ -19,12 +19,12 @@ class SearchSetlists extends Component {
 	handleSubmit = async (e) => {
 		e.preventDefault()
 		console.log("handleSubmit hit on SearchSetlists page");
-		const newSearchArtist = this.state.searchArtist.replace((/" "/g, "%20"))
-		const newSearchCity = 'cityName=' + this.state.searchCity.replace((/" "/g, "%20"))
-		const newSearchYear = '&year=' + this.state.searchYear.replace((/" "/g, "%20"))
-		// const apiCall = `${process.env.REACT_APP_BACKEND_URL}/concert/search/setlist/${newSearchArtist}/${newSearchCity}${newSearchYear}`
-		const apiCall = process.env.REACT_APP_BACKEND_URL + '/concert/search/setlist?artist='
-			+ this.state.searchArtist.replace(/" "/g, "%20")
+		// const newSearchArtist = this.state.searchArtist.replace((/" "/g, "%20"))
+		// const newSearchCity = '&cityName=' + this.state.searchCity.replace((/" "/g, "%20"))
+		// const newSearchYear = '&year=' + this.state.searchYear.replace((/" "/g, "%20"))
+		// const apiCall = `${process.env.REACT_APP_BACKEND_URL}/concert/search/setlist/${newSearchArtist}${newSearchCity}${newSearchYear}`
+		const apiCall = process.env.REACT_APP_BACKEND_URL + '/concert/search/setlist?artistName='
+			+ this.state.searchArtist.replace(/ /g, "%20")
 			+ '&cityName=' + this.state.searchCity.replace(/" "/g, "%20")
 			+ '&year=' + this.state.searchYear.replace((/" "/g, "%20"))
 		console.log(apiCall);
