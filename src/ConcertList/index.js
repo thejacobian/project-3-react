@@ -19,15 +19,30 @@ class ConcertList extends React.Component {
 		});
 
 	}
+	handleClick = async (e) => {
+		e.preventDefault();
+		console.log(e.currentTarget.parentNode.dataset); /// this is the id
+
+		try {
+			const deletedConcert = await fetch(process.env.REACT_APP_BACKEND_URL + '/concert/' + e.currentTarget.parentNode.dataset.concertId, {
+				method: "DELETE",
+				credentials: 'include'
+			})
+			this.componentDidMount()
+		} catch (err){
+			console.error(err)
+		}
+	}
 	render(){
 		const concertList = this.state.list.map((concert) => {
 			return(
-				<li key={concert._id}>
+				<li data-concert-id={concert._id} key={concert._id}>
 					<span><strong>{concert.artistName}</strong></span><br/>
 					<span>{concert.venue}</span><br/>
 					<span>{concert.city}</span><br/>
 					<span>{concert.state}</span><br/>
 					<span>{concert.date}</span><br/>
+					<button onClick={this.handleClick}>Delete</button>
 				</li>
 				)
 		})
