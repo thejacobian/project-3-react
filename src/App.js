@@ -10,6 +10,7 @@ import Header from './Header'
 // import ConcertList from './ConcertList'
 import User from './User'
 import Home from './Home'
+import UserList from './UserList'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route exact path="/concert/search/setlist" component={ SearchSetlists } />
         <Route exact path="/user/search" component={ SearchArtists } />
         <Route exact path="/user" component={ User } />
+        <Route exact path="/user/allUsers" component={ UserList } />
       </Switch>
     </main>
   );
