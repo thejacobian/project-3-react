@@ -5,7 +5,8 @@ class Register extends Component {
 		super();
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			location: ''
 		}
 	}
 	handleChange = (e) => {
@@ -15,7 +16,7 @@ class Register extends Component {
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			await fetch(process.env.REACT_APP_BACKEND_URL + '/auth/register', {
+			const registerResponse = await fetch(process.env.REACT_APP_BACKEND_URL + '/auth/register', {
 		      method: 'POST',
 		      credentials: 'include',  // on every request we have to send the cookie
 		      body: JSON.stringify(this.state),
@@ -24,11 +25,10 @@ class Register extends Component {
 		    		}
 		    	})
 
-        	// const parsedResponse = await registerResponse.json();
-        	console.log('registered');
-      //   	if(parsedResponse.data === 'login successful'){
-	    	// 	this.props.history.push('/');
-	    	// }
+        	const parsedResponse = await registerResponse.json();
+        	if(parsedResponse.data === 'login successful'){
+	    		this.props.history.push('../user');
+	    	}
 	    }   
 		 catch (err){
 			console.error(err)
@@ -42,7 +42,8 @@ class Register extends Component {
 				<input type="text" name="username" onChange={this.handleChange}/>
 				Password:
 				<input type="password" name="password" onChange={this.handleChange}/>
-
+				Location:
+				<input type="text" name="location" onChange={this.handleChange}/>
 				<button type='submit'> Register </button>
 			</form>
 			)

@@ -15,7 +15,7 @@ class Login extends Component {
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			await fetch(process.env.REACT_APP_BACKEND_URL + '/auth/login', {
+			const loginResponse = await fetch(process.env.REACT_APP_BACKEND_URL + '/auth/login', {
 		      method: 'POST',
 		      credentials: 'include', 
 		      body: JSON.stringify(this.state),
@@ -24,11 +24,11 @@ class Login extends Component {
 		    		}
 		    	})
 			console.log("logged in as", this.state.username);
-        	// const parsedResponse = await loginResponse.json();
-
-      //   	if(parsedResponse.data === 'login successful'){
-	    	// 	this.props.history.push('/');
-	    	// }
+        	const parsedResponse = await loginResponse.json();
+        	console.log(parsedResponse);
+        	if(parsedResponse.status === 200){
+	    		this.props.history.push('/user');
+	    	}
 	    }   
 		 catch (err){
 			console.error(err)
