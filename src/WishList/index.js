@@ -23,21 +23,22 @@ class WishList extends React.Component {
 	}
 	handleClick = async (e) => {
 		e.preventDefault();
+		console.log(e.currentTarget.parentNode.dataset); /// this is the id
 		try {
-			const deletedWish = await fetch(process.env.REACT_APP_BACKEND_URL + 'api/v1/user/', {
+			const deletedWish = await fetch(process.env.REACT_APP_BACKEND_URL + '/user/', {
 				method: "DELETE",
 				credentials: 'include'
 			})
 			// const deleteWishJSON = = await 
 		} catch (err){
-			console.log(err)
+			console.error(err)
 		}
 	}
 	render() {
 
 		const wishList = this.state.list.map((wish, i) => {
 			return (
-				<li key={wish._id}>
+				<li data-wish-id={wish._id} key={wish._id}>
 					<span><strong>{wish.artistName}</strong></span><br/>
 					<button onClick={this.handleClick}>Delete</button>
 				</li>

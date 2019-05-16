@@ -30,6 +30,7 @@ class SearchArtists extends Component {
 			console.log(err);
 		}
 	}
+	// this adds artist to bucket list
 	handleClick = async (id, e) => {
 		e.preventDefault();
 		console.log('Bucketlist id: ', id);
@@ -64,14 +65,14 @@ class SearchArtists extends Component {
 						<button onClick={this.handleClick.bind(null, element.mbid)}>Add to BucketList</button>
 					</li>
 
-					)
+				)
 			})
 		}
 		return(
 			<div className="search">
 				<h1>Search Artists for Bucketlist</h1>
 				<form onSubmit={this.handleSubmit}>
-					<input type="text" name="searchParam" placeholder="Artist Name" onChange={this.handleChange}/>
+					<input type="text" value={this.state.searchParam} name="searchParam" placeholder="Artist Name" onChange={this.handleChange}/>
 					<button type="submit">Search</button>
 				</form>
 				<ul>
