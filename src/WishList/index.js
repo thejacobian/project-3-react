@@ -24,12 +24,13 @@ class WishList extends React.Component {
 	handleClick = async (e) => {
 		e.preventDefault();
 		console.log(e.currentTarget.parentNode.dataset); /// this is the id
+
 		try {
-			const deletedWish = await fetch(process.env.REACT_APP_BACKEND_URL + '/user/', {
+			const deletedWish = await fetch(process.env.REACT_APP_BACKEND_URL + '/user/' + e.currentTarget.parentNode.dataset.wishId, {
 				method: "DELETE",
 				credentials: 'include'
 			})
-			// const deleteWishJSON = = await 
+			this.componentDidMount()
 		} catch (err){
 			console.error(err)
 		}
