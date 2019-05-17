@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link }from 'react-router-dom';
  
 class WishList extends React.Component {
 
@@ -47,8 +48,9 @@ class WishList extends React.Component {
 		})
 		
 		return (
-			<div>
+			<div className="artistList">
 				<h1>Bucketlist Artists</h1>
+				<span><Link to='/user/search/'>Add Artists</Link></span>
 				<ul>
 					{wishList}
 				</ul>

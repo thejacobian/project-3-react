@@ -190,7 +190,26 @@ header img {
   color: #5FC7FD;
 }
 
+.artistList a, .concertList a {
+  color: #28A7F2;
+  text-decoration: none;
+}
 
+.artistList a:hover, .concertList a:hover {
+  color: #5FC7FD;
+}
+
+.artistList, .concertList {
+  display: flex;
+  flex-direction: column;
+  /*justify-content: center;*/
+}
+
+.artistList ul, .concertList ul {
+ display: flex;
+ justify-content: center;
+ flex-direction: column;
+}
 
 
 

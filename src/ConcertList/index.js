@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link }from 'react-router-dom';
 
 class ConcertList extends React.Component {
 
@@ -47,8 +48,9 @@ class ConcertList extends React.Component {
 				)
 		})
 		return(
-			<div>
-				<h1>Shows Attended</h1>
+			<div className="concertList">
+				<h1>Concerts Attended</h1>
+				<span><Link to='/concert/search/setlist'>Add Concerts</Link></span>
 				<ul>
 					{concertList}
 				</ul>
