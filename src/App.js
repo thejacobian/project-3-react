@@ -15,7 +15,7 @@ import UserList from './UserList'
 function App() {
   return (
     <main className="App">
-      <Header/>
+      
       <Switch>
         <Route exact path="/" component={ Home } />
         <Route exact path="/auth/login" component={ Login } />

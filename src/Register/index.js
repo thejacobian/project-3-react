@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link }from 'react-router-dom';
 
 class Register extends Component {
 	constructor(){
@@ -36,16 +37,21 @@ class Register extends Component {
 	
 	}
 	render(){
+		const logo = require('../public/BUCKETLIST VERTICAL.png')
 		return (
-			<form className="register" onSubmit={this.handleSubmit}>
-				<span>Username:</span>
-				<input type="text" name="username" onChange={this.handleChange}/>
-				<span>Password:</span>
-				<input type="password" name="password" onChange={this.handleChange}/>
-				<span>Location:</span>
-				<input type="text" name="location" onChange={this.handleChange}/>
-				<button type='submit'> Register </button>
-			</form>
+			<div className="register">
+				<img src={logo}/>
+				<form className="registerForm" onSubmit={this.handleSubmit}>
+					<span>Username:</span>
+					<input type="text" name="username" onChange={this.handleChange}/>
+					<span>Password:</span>
+					<input type="password" name="password" onChange={this.handleChange}/>
+					<span>Location:</span>
+					<input type="text" name="location" onChange={this.handleChange}/>
+					<button type='submit'> Register </button>
+					<span>Already have an account? <Link to='/auth/login'>Login</Link></span>
+				</form>
+			</div>
 			)
 	}
 }

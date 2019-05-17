@@ -15,10 +15,12 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-around;
+
 }
 
 header ul {
   display: flex;
+  flex-wrap: wrap;
 
 }
 
@@ -56,6 +58,7 @@ header img {
 
 .profile li {
   margin-bottom: 10px;
+
 /*  display: flex;
   flex-direction: column;
   justify-content: flex-start;*/
@@ -66,11 +69,21 @@ header img {
 }
 
 .search form {
-  margin-left: 40px;
+  margin-left: 100px;
   margin-bottom: 20px;
 }
 
-.search li{
+.search form input {
+  margin-left: 5px;
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.searchForm li{
   margin-bottom: 10px;
 }
 
@@ -126,32 +139,56 @@ header img {
   margin: 10px;
 }
 
-.userList a {
+.userList .users a {
   color: #28A7F2;
   text-decoration: none;
 }
 
-.userList a:hover {
+.userList .users a:hover {
   color: #5FC7FD;
 }
 
 .login, .register {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-size: 20px;
+}
+
+.login img, .register img {
+  width: 20%;
+  margin-left: 40%;
+  margin-right: 40%;
+  margin-bottom: 50px;
   margin-top: 50px;
 }
 
-.login span, .register span {
+.loginForm, .registerForm {
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+
+}
+
+.loginForm span, .registerForm span {
   margin-left: 15px;
   margin-right: 5px;
 }
 
-.login button, .register button {
+.loginForm button, .registerForm button {
   margin-left: 5px;
   font-size: 12px;
 }
 
+.loginForm a {
+  color: #28A7F2;
+  text-decoration: none;
+}
+
+.loginForm a:hover {
+  color: #5FC7FD;
+}
 
 
 

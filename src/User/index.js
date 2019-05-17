@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import WishList from '../WishList'
 import ConcertList from '../ConcertList'
+import Header from '../Header'
 
 class User extends Component {
 
 	render(){
 		return(
-			<div className="profile">
-				<ConcertList />
-				<WishList />
+			<div>
+				<Header />
+				<div className="profile">
+					<ConcertList />
+					<WishList />
+				</div>
 			</div>
 
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../Header'
 
 class SearchSetlists extends Component {
 	constructor(){
@@ -99,6 +100,7 @@ class SearchSetlists extends Component {
 
 		return(
 			<div className="search">
+				<Header/>
 				<h1>Search Setlists</h1>
 				<form onSubmit={this.handleSubmit}>
 					<input type="text" name="searchArtist" value={this.state.searchArtist} placeholder="Artist Name" onChange={this.handleChange}/>

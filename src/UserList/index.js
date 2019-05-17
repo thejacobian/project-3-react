@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link }from 'react-router-dom';
+import Header from '../Header'
 
 class UserList extends React.Component {
 	constructor(){
@@ -31,8 +32,9 @@ class UserList extends React.Component {
 		})
 		return(
 			<div className="userList">
+				<Header />
 				<h1>Users</h1>
-				<ul>
+				<ul className="users">
 					{userList}
 				</ul>
 			</div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../Header'
 
 class SearchArtists extends Component {
 	constructor(){
@@ -70,8 +71,9 @@ class SearchArtists extends Component {
 		}
 		return(
 			<div className="search">
+				<Header />
 				<h1>Search Artists for Bucketlist</h1>
-				<form onSubmit={this.handleSubmit}>
+				<form clasname="searchForm" onSubmit={this.handleSubmit}>
 					<input type="text" value={this.state.searchParam} name="searchParam" placeholder="Artist Name" onChange={this.handleChange}/>
 					<button type="submit">Search</button>
 				</form>
