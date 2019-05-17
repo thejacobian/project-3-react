@@ -37,12 +37,12 @@ class Register extends Component {
 	}
 	render(){
 		return (
-			<form onSubmit={this.handleSubmit}>
-				Username:
+			<form className="register" onSubmit={this.handleSubmit}>
+				<span>Username:</span>
 				<input type="text" name="username" onChange={this.handleChange}/>
-				Password:
+				<span>Password:</span>
 				<input type="password" name="password" onChange={this.handleChange}/>
-				Location:
+				<span>Location:</span>
 				<input type="text" name="location" onChange={this.handleChange}/>
 				<button type='submit'> Register </button>
 			</form>

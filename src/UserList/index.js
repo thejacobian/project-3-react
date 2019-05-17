@@ -30,7 +30,7 @@ class UserList extends React.Component {
 			)
 		})
 		return(
-			<div>
+			<div className="userList">
 				<h1>Users</h1>
 				<ul>
 					{userList}
