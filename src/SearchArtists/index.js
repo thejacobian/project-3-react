@@ -73,7 +73,7 @@ class SearchArtists extends Component {
 			<div className="search">
 				<Header />
 				<h1>Search Artists for Bucketlist</h1>
-				<form clasname="searchForm" onSubmit={this.handleSubmit}>
+				<form className="searchForm" onSubmit={this.handleSubmit}>
 					<input type="text" value={this.state.searchParam} name="searchParam" placeholder="Artist Name" onChange={this.handleChange}/>
 					<button type="submit">Search</button>
 				</form>
