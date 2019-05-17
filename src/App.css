@@ -75,6 +75,12 @@ header img {
   margin-bottom: 10px;
 }
 
+.home {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .home h1 {
   text-align:center;
 }
@@ -103,7 +109,9 @@ header img {
   justify-content: center;
 }
 
+.home img {
 
+}
 
 
 
