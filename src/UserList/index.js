@@ -14,18 +14,23 @@ class UserList extends React.Component {
 			method: 'GET',
 			credentials: 'include'
 		})
-		const fetchedData = await data.json()
+		let fetchedData = [{}];
+		try {
+			fetchedData = await data.json()
+		} catch{
+			console.log("no users")
+		}
 		console.log(fetchedData);
 		this.setState({
-			list: fetchedData.data
+			list: fetchedData
 		});
 
 	}
 	render(){
 		const userList = this.state.list.map((user) => {
 			return(
-				<li key={user._id}>
-					<span><strong><Link to={`${user._id}`}>{user.username}</Link></strong></span><br/>
+				<li key={user.id}>
+					<h2><strong><Link to='/user'>{user.username}</Link></strong></h2><br/>
 					<span>{user.location}</span>
 				</li>
 			)

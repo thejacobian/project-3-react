@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link }from 'react-router-dom';
+import { Link, Redirect }from 'react-router-dom';
 
 class Register extends Component {
 	constructor(){
@@ -7,7 +7,8 @@ class Register extends Component {
 		this.state = {
 			username: '',
 			password: '',
-			location: ''
+			location: '',
+			redirect: false,
 		}
 	}
 	handleChange = (e) => {
@@ -27,9 +28,10 @@ class Register extends Component {
 		    	})
 
         	const parsedResponse = await registerResponse.json();
-        	if(parsedResponse.status === 200){
-	    		this.props.history.push('../user');
-	    	}
+        	if(registerResponse.status === 200) {
+						this.props.history.push('../user');
+						this.setState({ redirect: true })
+	    		}
 	    }   
 		 catch (err){
 			console.error(err)
@@ -38,6 +40,9 @@ class Register extends Component {
 	}
 	render(){
 		const logo = require('../public/BUCKETLIST VERTICAL.png')
+		if (this.state.redirect) {
+			return <Redirect to='/auth/login'/>;
+		}
 		return (
 			<div className="register">
 				<img src={logo}/>

@@ -1,17 +1,41 @@
 import React, { Component } from 'react';
-import { Link }from 'react-router-dom';
+import { Link, Redirect }from 'react-router-dom';
 
 class Login extends Component {
 	constructor(){
 		super();
+		this.handleLogout();
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			redirect: false,
 		}
 	}
+	
+	handleLogout = async () => {
+		try {
+			const logoutResponse = await fetch(process.env.REACT_APP_BACKEND_URL + '/auth/logout', {
+		      method: 'POST',
+		      credentials: 'include', 
+		      body: JSON.stringify(this.state),
+		      headers:{
+		        'Content-Type': 'application/json'
+		    		}
+		    	})
+        	const parsedResponse = await logoutResponse.json();
+        	console.log(parsedResponse);
+        	if(parsedResponse.status === 200){
+						console.log("logged out", this.state.username);
+	    		 //this.props.history.push('/user');
+	    		}
+	    }   
+		 catch (err){
+			console.error(err)
+		 }
+	}
+
 	handleChange = (e) => {
 		this.setState({[e.target.name]: e.target.value});
-
 	}
 	handleSubmit = async (e) => {
 		e.preventDefault();
@@ -27,9 +51,10 @@ class Login extends Component {
 			console.log("logged in as", this.state.username);
         	const parsedResponse = await loginResponse.json();
         	console.log(parsedResponse);
-        	if(parsedResponse.status === 200){
-	    		this.props.history.push('/user');
-	    	}
+        	if(loginResponse.status === 200){
+						this.props.history.push('/user');
+						this.setState({ redirect: true });
+	    		}
 	    }   
 		 catch (err){
 			console.error(err)
@@ -39,7 +64,7 @@ class Login extends Component {
 	handleClick = async (e) => {
 		e.preventDefault();
 		try {
-			await fetch(process.env.REACT_APP_BACKEND_URL + 'auth/logout', {
+			await fetch(process.env.REACT_APP_BACKEND_URL + '/auth/logout', {
 				method: "GET",
 				credentials: 'include'
 			})
@@ -50,6 +75,10 @@ class Login extends Component {
 	}
 	render(){
 		const logo = require('../public/BUCKETLIST VERTICAL.png')
+		if (this.state.redirect) {
+			return <Redirect to='/user'/>;
+		}
+		
 		return (
 			<div className="login">
 				<img src={logo}/>

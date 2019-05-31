@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../Header'
+import { Redirect }from 'react-router-dom';
 
 class SearchSetlists extends Component {
 	constructor(){
@@ -8,7 +9,8 @@ class SearchSetlists extends Component {
 			searchArtist: '',
 			searchCity: '',
 			searchYear: '',
-			searchResults: null
+			searchResults: null,
+			redirect: false,
 		}
 
 	}
@@ -24,22 +26,25 @@ class SearchSetlists extends Component {
 		// const newSearchCity = '&cityName=' + this.state.searchCity.replace((/" "/g, "%20"))
 		// const newSearchYear = '&year=' + this.state.searchYear.replace((/" "/g, "%20"))
 		// const apiCall = `${process.env.REACT_APP_BACKEND_URL}/concert/search/setlist/${newSearchArtist}${newSearchCity}${newSearchYear}`
-		const apiCall = process.env.REACT_APP_BACKEND_URL + '/concert/search/setlist?artistName='
-			+ this.state.searchArtist.replace(/ /g, "%20")
-			+ '&cityName=' + this.state.searchCity.replace(/" "/g, "%20")
-			+ '&year=' + this.state.searchYear.replace((/" "/g, "%20"))
+		const apiCall = 'https://cors-anywhere.herokuapp.com/https://api.setlist.fm/rest/1.0/search/setlists?artistName='
+		+ this.state.searchArtist.replace(/ /g, "%20")
+		+ '&cityName=' + this.state.searchCity.replace(/" "/g, "%20")
+		+ '&year=' + this.state.searchYear.replace((/" "/g, "%20"));
 		console.log(apiCall);
-
 		try {
-			const response = await fetch(apiCall)
-
+			const response = await fetch(apiCall, {
+				method: 'GET',
+				headers: {
+					'Accept': 'application/json',
+					'X-API-key': process.env.REACT_APP_SETLISTFM_API_KEY
+				}
+			})
 			console.log("raw response: ", response);
-
 			const setlists = await response.json()
 			console.log("here's the response from the API call");
 			console.log(setlists);
 			this.setState({
-				searchResults: setlists.data
+				searchResults: setlists.setlist
 			})
 			console.log(this.state);
 		} catch (err){
@@ -48,16 +53,50 @@ class SearchSetlists extends Component {
 	}
 	handleClick = async (id, e) => {
 		e.preventDefault();
+		const selectedSetlist = this.state.searchResults.filter((setlist) => {
+			return setlist.id === id;
+		})[0];
+		console.log(selectedSetlist);
+		const apiSetlist = {};
+		apiSetlist.artistName = selectedSetlist.artist.name;
+		apiSetlist.setlistId = selectedSetlist.id;
+		apiSetlist.venue = selectedSetlist.venue.name;
+		apiSetlist.city = selectedSetlist.venue.city.name;
+		apiSetlist.state = selectedSetlist.venue.city.state;
+		apiSetlist.date = selectedSetlist.eventDate;
+		let setlistStr = "";
+		let songNum = 0;
+		console.log(selectedSetlist.sets, "selectedSetList.sets");
+		// for(let set in selectedSetlist.sets.set) {
+		for (let i = 0; i < selectedSetlist.sets.set.length; i++) {
+			// console.log(`SetNum: ${songNum}\r\n`)
+			// console.log(selectedSetlist.sets.set[i], "set");
+			for (let x = 0; x < selectedSetlist.sets.set[i].song.length; x++) {
+				songNum++;
+				console.log(`song${songNum}: ${selectedSetlist.sets.set[i].song[x].name}`);
+				setlistStr = setlistStr + `${songNum}. ${selectedSetlist.sets.set[i].song[x].name}\r\n`;
+				// console.log(`SongNum: ${songNum}. ${set.song[i].name}\r\n`)
+				// setlistStr.concat(`${songNum}. ${set.song[i].name}\r\n`);
+			}
+			// set.foreach((song) => {
+			// 	songNum++;
+			// 	console.log(`SongNum: ${songNum}. ${song.name}\r\n`)
+			// 	setlistStr.concat(`${songNum}. ${song.name}\r\n`);
+			// });
+		}
+		apiSetlist.setlist = setlistStr;
+		console.log(apiSetlist);
+
 		console.log('I attended ', id);
-		const apiCall = `${process.env.REACT_APP_BACKEND_URL}/concert/new/${id}`
+		const backendCall = `${process.env.REACT_APP_BACKEND_URL}/concert/`
 		try {
 
-			const addedConcert = await fetch(apiCall,{
+			const addedConcert = await fetch(backendCall,{
 				method: 'POST',
 				credentials: 'include',
-				body: JSON.stringify(id),
+				body: JSON.stringify(apiSetlist),
 				headers: {
-					'Accept': 'application/json'
+					'Content-Type': 'application/json'
 				}
 			})
 			const parsedResponse = await addedConcert.json();
@@ -66,7 +105,8 @@ class SearchSetlists extends Component {
 				searchResults: null,
 				searchArtist: '',
 				searchCity: '',
-				searchYear: ''
+				searchYear: '',
+				redirect: true
 			})
 
 		} catch (err){
@@ -77,21 +117,22 @@ class SearchSetlists extends Component {
 
 	}
 	render(){
+		if (this.state.redirect) {
+			return <Redirect to='/user'/>;
+		}
 
 		let setlistList = null;
-
 		if(this.state.searchResults){
 			setlistList = this.state.searchResults.map( (element, i) => {
 
 				return(
 					<li key={i} id={element.id} >
-						<span><strong>{element.artist}</strong></span><br/>
-						<span>{element.venue}</span><br/>
-						<span>{element.city}, </span>
-						<span>{element.state}</span><br/>
-						<span>{element.date}</span><br/>
+						<span><strong>{element.artist.name}</strong></span><br/>
+						<span>{element.venue.name}</span><br/>
+						<span>{element.venue.city.name}, </span>
+						<span>{element.venue.city.state}</span><br/>
+						<span>{element.eventDate}</span><br/>
 						<button onClick={this.handleClick.bind(null,element.id)}>I attended</button>
-
 					</li>
 				)
 				

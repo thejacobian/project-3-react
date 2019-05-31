@@ -12,6 +12,8 @@ import User from './User'
 import Home from './Home'
 import UserList from './UserList'
 
+require('dotenv').config()
+
 function App() {
   return (
     <main className="App">
@@ -19,6 +21,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={ Home } />
         <Route exact path="/auth/login" component={ Login } />
+        <Route exact path="/auth/logout" component={ Login } />
         <Route exact path="/auth/register" component={ Register } />
         <Route exact path="/concert/search/setlist" component={ SearchSetlists } />
         <Route exact path="/user/search" component={ SearchArtists } />

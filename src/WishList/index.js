@@ -7,27 +7,38 @@ class WishList extends React.Component {
 		super()
 		this.state = {
 			list: [],
-			wishId: null
+			wishId: null,
+			noWishes: false,
 		}
 	}
 	async componentDidMount() {
-		const data = await fetch(process.env.REACT_APP_BACKEND_URL + '/user/profile',{
+		const data = await fetch(process.env.REACT_APP_BACKEND_URL + '/user/profile/wishes',{
 			method: 'GET',
 			credentials: 'include'
 		})
-		const fetchedData = await data.json()
-		
-		this.setState({
-			list: fetchedData.wishlist
-		});
-		
+		let fetchedData = [{}];
+		try {
+			fetchedData = await data.json()
+		} catch{
+			console.log("no users")
+		}
+		console.log(fetchedData);
+		if(!fetchedData[0].artistName){
+			this.setState({
+				noWishes: true
+			});
+		} else {
+			this.setState({
+				list: fetchedData
+			});
+		}
 	}
 	handleClick = async (e) => {
 		e.preventDefault();
 		console.log(e.currentTarget.parentNode.dataset); /// this is the id
 
 		try {
-			const deletedWish = await fetch(process.env.REACT_APP_BACKEND_URL + '/user/' + e.currentTarget.parentNode.dataset.wishId, {
+			const deletedWish = await fetch(process.env.REACT_APP_BACKEND_URL + '/wish/' + e.currentTarget.parentNode.dataset.wishId, {
 				method: "DELETE",
 				credentials: 'include'
 			})
@@ -37,11 +48,21 @@ class WishList extends React.Component {
 		}
 	}
 	render() {
+		if (this.state.noWishes) {
+			return (
+			<div className="artistList">
+				<h1>Bucketlist Artists</h1>
+				<span><Link to='/user/search/'>Add Artists</Link></span>
+				<ul>No Bucketlist Artists found</ul>
+			</div>
+			)
+		}
 
 		const wishList = this.state.list.map((wish, i) => {
 			return (
-				<li data-wish-id={wish._id} key={wish._id}>
-					<span><strong>{wish.artistName}</strong></span><br/>
+				<li data-wish-id={wish.id} key={wish.id}>
+					<h2><strong>Artist: {wish.artistName}</strong></h2>
+					<span>Popularity: {wish.users.length}</span><br/>
 					<button onClick={this.handleClick}>Delete</button>
 				</li>
 			)
@@ -56,9 +77,7 @@ class WishList extends React.Component {
 				</ul>
 			</div>
 		)
-		
 	}
-	
 }
 
 export default WishList;
